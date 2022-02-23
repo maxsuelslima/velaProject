@@ -1,9 +1,9 @@
 import { Image,Text,Box,Flex, Button, ButtonProps, TextProps, TabsProps, Tabs } from "@chakra-ui/react"
 import { ReactElement, ReactNode, useState } from "react"
-import Extras from "../src/components/MonteASua/Extras"
+import Extras from "../src/components/MonteASua/ExtrasComponent"
 import ImageHandler from "../src/components/MonteASua/ImageHandler"
 import MenuButtons from "../src/components/MonteASua/MenuButtons"
-import Montar from "../src/components/MonteASua/Montar"
+import Montar from "../src/components/MonteASua/MontarComponent"
 
 interface SelectButtonProps extends TabsProps{
     children:ReactNode;
@@ -15,7 +15,7 @@ interface HeadingProps extends TextProps{
 
 
 function Vela2(){
-    const [tab,setTab]=useState(2)
+    const [tab,setTab]=useState(1)
     return(
         <Box w="100%" color="#2D2D2D">
             <Flex  w="100%" flexShrink={0}  maxH="calc(100vh - 130px)">
