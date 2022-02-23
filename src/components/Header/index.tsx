@@ -1,10 +1,12 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex,Image, OrderedList } from "@chakra-ui/react"
+import Cart from "./Cart"
+import NavBar from "./NavBar"
 
 function Header(){
     return(
-        <Flex>
-            <Flex></Flex>
-            <Flex></Flex>
+        <Flex h="56px" w="100%" bg='gray.800' justify="space-between">
+            <NavBar/>
+            <Cart/>
         </Flex>
     )
 }
