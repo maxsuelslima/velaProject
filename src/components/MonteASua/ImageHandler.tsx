@@ -23,6 +23,7 @@ function MonteASUA(){
         });
     }, []);
     const imageIndex=velaContext.bike.cor*velaContext.bike.tam
+
     console.log(imageIndex)
 return(
     <Flex align="center" justify="center" w="100%" bg="#EFEFEF" pt="16px">

@@ -34,14 +34,14 @@ const api = axios.create({
     baseURL: "http://localhost:3333/",
 });
 
-function handle(id:number){
-    console.log('ola'+id)
-}
+
 function Montar(){
     const [data,setData]=useState<QuadroName[]>([])
     const [cores,setCores]=useState<Cores[]>([])
     const [tamanho,setTamanho]=useState<Tamanho[]>([])
-   
+    const [quadro, setQuadro]=useState(2)
+    const [tam, setTam]=useState(1)
+    const [color,setColor]=useState(1)
 
 
     useEffect(() => {
@@ -68,11 +68,13 @@ function Montar(){
             console.error("ops! ocorreu um erro" + err);
         });
     }, []);
-
-
-
     const velaContext=useContext(VelaContext)
 
+    function handle(id:number){
+        console.log('ol'+id)
+        setQuadro(id)
+    }
+    function colorHnalder()
     return(
         <Box p="2em 2em 2em 2.5em" boxSizing="border-box">
             <Box>
@@ -82,7 +84,7 @@ function Montar(){
                     <Flex justify="center" align="center">
                     {data.map(x=>{
                             return(
-                        <SelectButton onClick={()=>handle(x.id)} isActived={velaContext.bike.quadro==x.id} h="36px">{x.name}</SelectButton>
+                        <SelectButton onClick={()=>handle(x.id)} isActived={quadro==x.id} h="36px">{x.name}</SelectButton>
                         )
                     })}
                     </Flex>
@@ -108,7 +110,7 @@ function Montar(){
                     <Flex wrap="wrap" boxSizing="border-box" align="center" justify="center">
                         {tamanho.map((x,y)=>{
                             return(<>
-                                {(y>0 && velaContext.bike.quadro==1)&& 
+                                {(y>0 && quadro==2)&& 
                                 <SelectButton isActived={velaContext.bike.tam===x.id}>
                                     {console.log(velaContext.bike.tam)}
                                     {console.log(x.id)}
