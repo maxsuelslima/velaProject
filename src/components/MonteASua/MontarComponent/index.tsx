@@ -1,10 +1,11 @@
 import {Text ,Image as ChakraImage,Box, Flex, Tabs, TabsProps, TextProps, ButtonProps, Button, ImageProps as ChakraImageProps } from "@chakra-ui/react"
 import axios from "axios"
-import { GetStaticProps } from "next"
-import { ReactNode, useContext, useEffect, useState } from "react"
+import { ReactNode, useCallback, useContext, useEffect, useState } from "react"
 import VelaContext from "../../../Context/vela2context"
+import { handleSelectecdBike } from "../../../store/modules/selectedBike/action"
 import SelectButton from "./SelectButton"
-
+import {useDispatch, useSelector, useStore} from "react-redux"
+import { IBikeState } from "../../../store/modules/selectedBike/type"
 interface HeadingProps extends TextProps{
     children:ReactNode
 }
@@ -15,6 +16,7 @@ interface ImageProps extends ChakraImageProps{
 
 type QuadroName={
     name:string,
+    id:number,
 }
 type Cores={
     id:string,
@@ -40,9 +42,12 @@ function Montar(){
     const [cores,setCores]=useState<Cores[]>([])
     const [tamanho,setTamanho]=useState<Tamanho[]>([])
     const [quadro, setQuadro]=useState(2)
-    const [tam, setTam]=useState(1)
-    const [color,setColor]=useState(1)
+    const dispatch=useDispatch()
 
+
+    const handleBikeProps =useCallback((id:number)=>{
+        dispatch(handleSelectecdBike(id))
+    },[dispatch])
 
     useEffect(() => {
         api
@@ -68,13 +73,14 @@ function Montar(){
             console.error("ops! ocorreu um erro" + err);
         });
     }, []);
-    const velaContext=useContext(VelaContext)
 
+    const bike:IBikeState=useSelector(state=>state.bike)
+
+    console.log(bike.quadroId)
     function handle(id:number){
         console.log('ol'+id)
         setQuadro(id)
     }
-    function colorHnalder()
     return(
         <Box p="2em 2em 2em 2.5em" boxSizing="border-box">
             <Box>
@@ -84,7 +90,7 @@ function Montar(){
                     <Flex justify="center" align="center">
                     {data.map(x=>{
                             return(
-                        <SelectButton onClick={()=>handle(x.id)} isActived={quadro==x.id} h="36px">{x.name}</SelectButton>
+                        <SelectButton onClick={()=>handleBikeProps(x.id)} isActived={bike.quadroId==x.id} h="36px">{x.name}</SelectButton>
                         )
                     })}
                     </Flex>
@@ -96,7 +102,7 @@ function Montar(){
                     <Flex wrap="wrap" justify="center" align="center">
                         {cores.map(x=>{
                             return(
-                                <SelectButton  isActived={velaContext.bike.cor===parseInt(x.id)}>
+                                <SelectButton  isActived={bike.colorId===parseInt(x.id)}>
                                         <Image flexShrink={0} width="22px" height="22px" src={x.imgUrl}></Image>
                                         <Text mt="5px" flexShrink={0}>{x.name} {x.id}</Text>
                                     </SelectButton>
@@ -111,10 +117,7 @@ function Montar(){
                         {tamanho.map((x,y)=>{
                             return(<>
                                 {(y>0 && quadro==2)&& 
-                                <SelectButton isActived={velaContext.bike.tam===x.id}>
-                                    {console.log(velaContext.bike.tam)}
-                                    {console.log(x.id)}
-                                    {console.log(velaContext.bike.tam===x.id)}
+                                <SelectButton isActived={bike.sizeId===x.id}>
                                     <Image src={x.imgUrl}></Image>
                                     <Text>{x.size}</Text>
                                 </SelectButton>
@@ -139,22 +142,5 @@ function Heading1({children, ...rest}:HeadingProps){
         <Text my="0.7em" fontWeight={500} fontSize="1.1rem" lineHeight="1.5em" {...rest}>{children}</Text>
     )
 }
-
-
-export const getStaticProps: GetStaticProps = async () => {
-
-    const response=await api
-    .get("/bikeQuadro")
-    .then((response) =>(response))
-    .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-    });
-    console.log('response')
-    return {
-        props: {
-        },
-    }
-}
-
 
 export default Montar
