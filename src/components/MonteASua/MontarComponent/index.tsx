@@ -20,7 +20,7 @@ type QuadroName={
     id:number,
 }
 type Cores={
-    id:string,
+    id:number,
     name:string,
     imgUrl:string
 }
@@ -31,7 +31,10 @@ type Tamanho={
     size:string
 }
 
-
+type changeOrder={
+    payloadId:number,
+    orderId:number
+}
 
 const api = axios.create({
     baseURL: "http://localhost:3333/",
@@ -42,13 +45,7 @@ function Montar(){
     const [data,setData]=useState<QuadroName[]>([])
     const [cores,setCores]=useState<Cores[]>([])
     const [tamanho,setTamanho]=useState<Tamanho[]>([])
-    const [quadro, setQuadro]=useState(2)
     const dispatch=useDispatch()
-
-
-    const handleBikeProps =useCallback((id:number)=>{
-        dispatch(handleSelectecdBike(id))
-    },[dispatch])
 
     useEffect(() => {
         api
@@ -75,24 +72,24 @@ function Montar(){
         });
     }, []);
 
-    const bike=useSelector<IState, IBikeState>(state=>state.bike)
+    const handleBikeProps =useCallback((id:changeOrder)=>{
+        dispatch(handleSelectecdBike(id))
+    },[dispatch])
 
-    console.log(bike.quadroId)
+    const bike=useSelector<IState, IBikeState>(state=>state.bike)
 
     return(
         <Box p="2em 2em 2em 2.5em" boxSizing="border-box">
             <Box>
                 <Heading1 mt="0">Geometria:</Heading1>
                 <Flex wrap="wrap" justify="center" align="center">
-         
                     <Flex justify="center" align="center">
                     {data.map(x=>{
                             return(
-                        <SelectButton onClick={()=>handleBikeProps(x.id)} isActived={bike.quadroId==x.id} h="36px">{x.name}</SelectButton>
+                        <SelectButton onClick={()=>handleBikeProps({payloadId:x.id,orderId:1})} isActived={bike.quadroId==x.id} h="36px">{x.name}</SelectButton>
                         )
                     })}
                     </Flex>
-   
                 </Flex>
             </Box>
             <Box>
@@ -100,7 +97,7 @@ function Montar(){
                     <Flex wrap="wrap" justify="center" align="center">
                         {cores.map(x=>{
                             return(
-                                <SelectButton  isActived={bike.colorId===parseInt(x.id)}>
+                                <SelectButton onClick={()=>handleBikeProps({payloadId:x.id,orderId:2})}  isActived={bike.colorId===x.id}>
                                         <Image flexShrink={0} width="22px" height="22px" src={x.imgUrl}></Image>
                                         <Text mt="5px" flexShrink={0}>{x.name} {x.id}</Text>
                                     </SelectButton>
@@ -111,11 +108,12 @@ function Montar(){
             </Box>
             <Box>
                 <Heading1>Tamanho:</Heading1>
-                    <Flex wrap="wrap" boxSizing="border-box" align="center" justify="center">
+                    <Flex  wrap="wrap" boxSizing="border-box" align="center" justify="center">
                         {tamanho.map((x,y)=>{
-                            return(<>
-                                {(y>0 && quadro==2)&& 
-                                <SelectButton isActived={bike.sizeId===x.id}>
+                            return(
+                            <>
+                                {(y>0 && bike.quadroId==2)&& 
+                                <SelectButton onClick={()=>handleBikeProps({payloadId:x.id,orderId:3})} isActived={bike.sizeId===x.id}>
                                     <Image src={x.imgUrl}></Image>
                                     <Text>{x.size}</Text>
                                 </SelectButton>

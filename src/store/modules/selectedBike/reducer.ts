@@ -16,18 +16,19 @@ const selectedBike:Reducer<IBikeState>=(state=INITIAL_STATE, action)=>{
     
     switch(action.type){
         case 'CHANGE_QUADRO':{
-            const {id} = action.payload
-            return{...state,quadroId:id}
+            console.log(action.payload)
+            const {payloadId} = action.payload
+            return{...state,quadroId:payloadId}
             break;
         }
         case 'CHANGE_COLOR':{
-            const {id} = action.payload
-            return{...state,quadroId:id}
+            const {payloadId} = action.payload
+            return{...state,colorId:payloadId}
             break;
         }
         case 'CHANGE_SIZE':{
-            const {id} = action.payload
-            return{...state,quadroId:id}
+            const {payloadId} = action.payload
+            return{...state,sizeId:payloadId}
             break;
         }
         default:{

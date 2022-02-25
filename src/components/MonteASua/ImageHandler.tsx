@@ -1,32 +1,41 @@
 import { Flex,Image } from "@chakra-ui/react"
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import VelaContext from "../../Context/vela2context";
+import { IState } from "../../store";
+import { IBikeState } from "../../store/modules/selectedBike/type";
 
 type BikePhoto={
-    bpURL:string
+    bpURL:[
+        {payload:[{}]}
+    ]
 }
 
 const api = axios.create({
     baseURL: "http://localhost:3333/",
 });
 function MonteASUA(){
-    const [bikePhotos,setBikePhotos]=useState<BikePhoto[]>([])
+    const [bikePhotos,setBikePhotos]=useState<BikePhoto>()
     
-    const velaContext=useContext(VelaContext)
+    const bike=useSelector<IState, IBikeState>(state=>state.bike)
+
     useEffect(() => {
         api
-        .get<BikePhoto[]>("/bikePhoto")
+        .get<BikePhoto>("/bikePhoto")
         .then((response) => setBikePhotos(response.data))
         .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
         });
     }, []);
-    const imageIndex=velaContext.bike.cor*velaContext.bike.tam
-
+    const imageIndex=bike.colorId
+    console.log(imageIndex)
+    const sizeIndex=bike.sizeId
+    console.log(bikePhotos)
+    const teste=bikePhotos?.bpURL[0].payload[0]
 return(
     <Flex align="center" justify="center" w="100%" bg="#EFEFEF" pt="16px">
-        <Image objectFit="cover" alt="bike daohora" maxH="825px" src={bikePhotos[imageIndex-1]}/>
+        <Image objectFit="cover" alt="bike daohora" maxH="825px" src={`${teste}`}/>
     </Flex>
 )
 }
