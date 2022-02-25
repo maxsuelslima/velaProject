@@ -62,22 +62,27 @@ module.exports=()=>{
                 imgUrl:"https://firebasestorage.googleapis.com/v0/b/vela-c1f68.appspot.com/o/public%2Fvelabikescom%2Fassets%2FCoral.png?alt=media&token=fd41a80b-3573-420a-9b1b-15e68d79ad74",
             }],
         bikePhoto:[
-[            "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-VERDE-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-AZUL-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-PRETO-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-CORAL-CREME.png",],
-[            "https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-VERDE-CREME.png",
+         [["https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-VERDE-CREME.png",
+           "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-AZUL-CREME.png",
+           "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-PRETO-CREME.png",
+           "https://velabikes.com.br/static/vela2/models/VEL-V2-490-26-CORAL-CREME.png",]],
+
+          [["https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-VERDE-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-AZUL-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-PRETO-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-CORAL-CREME.png",
+            "https://velabikes.com.br/static/vela2/models/VEL-V2-510-26-CORAL-CREME.png"],
+
+           [,
             "https://velabikes.com.br/static/vela2/models/VEL-V2-550-29-VERDE-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-550-29-AZUL-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-550-29-PRETO-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-550-29-CORAL-CREME.png",
+            "https://velabikes.com.br/static/vela2/models/VEL-V2-550-29-CORAL-CREME.png"],
+            
+           [
             "https://velabikes.com.br/static/vela2/models/VEL-V2-590-29-VERDE-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-590-29-AZUL-CREME.png",
             "https://velabikes.com.br/static/vela2/models/VEL-V2-590-29-PRETO-CREME.png",
-            "https://velabikes.com.br/static/vela2/models/VEL-V2-590-29-CORAL-CREME.png",]
+            "https://velabikes.com.br/static/vela2/models/VEL-V2-590-29-CORAL-CREME.png"]]
         ]
     }
     return data

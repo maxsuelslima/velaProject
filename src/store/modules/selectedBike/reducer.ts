@@ -4,7 +4,7 @@ import { IBikeState } from "./type";
 const INITIAL_STATE:IBikeState={
     quadroId:1,
     colorId:1,
-    sizeId:2,
+    sizeId:1,
 }
 type actionProps={
     payload:{
@@ -18,7 +18,7 @@ const selectedBike:Reducer<IBikeState>=(state=INITIAL_STATE, action)=>{
         case 'CHANGE_QUADRO':{
             console.log(action.payload)
             const {payloadId} = action.payload
-            return{...state,quadroId:payloadId}
+            return{...state,quadroId:payloadId,sizeId:payloadId}
             break;
         }
         case 'CHANGE_COLOR':{

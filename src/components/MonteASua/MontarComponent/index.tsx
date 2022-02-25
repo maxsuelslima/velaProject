@@ -111,13 +111,18 @@ function Montar(){
                     <Flex  wrap="wrap" boxSizing="border-box" align="center" justify="center">
                         {tamanho.map((x,y)=>{
                             return(
-                            <>
+                            <>  
+                                {(y==0 && bike.quadroId==1 )&&
+                                    <SelectButton onClick={()=>handleBikeProps({payloadId:x.id,orderId:3})} isActived={bike.sizeId===x.id}>
+                                        <Image src={x.imgUrl}></Image>
+                                        <Text>{x.size}</Text>
+                                    </SelectButton>
+                                }
                                 {(y>0 && bike.quadroId==2)&& 
                                 <SelectButton onClick={()=>handleBikeProps({payloadId:x.id,orderId:3})} isActived={bike.sizeId===x.id}>
                                     <Image src={x.imgUrl}></Image>
                                     <Text>{x.size}</Text>
-                                </SelectButton>
-                                }
+                                </SelectButton>}
                             </>
                             )
                         })}
