@@ -24,7 +24,6 @@ function MonteASUA(){
     }, []);
     const imageIndex=velaContext.bike.cor*velaContext.bike.tam
 
-    console.log(imageIndex)
 return(
     <Flex align="center" justify="center" w="100%" bg="#EFEFEF" pt="16px">
         <Image objectFit="cover" alt="bike daohora" maxH="825px" src={bikePhotos[imageIndex-1]}/>

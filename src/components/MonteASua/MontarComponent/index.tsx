@@ -6,6 +6,7 @@ import { handleSelectecdBike } from "../../../store/modules/selectedBike/action"
 import SelectButton from "./SelectButton"
 import {useDispatch, useSelector, useStore} from "react-redux"
 import { IBikeState } from "../../../store/modules/selectedBike/type"
+import { IState } from "../../../store"
 interface HeadingProps extends TextProps{
     children:ReactNode
 }
@@ -74,13 +75,10 @@ function Montar(){
         });
     }, []);
 
-    const bike:IBikeState=useSelector(state=>state.bike)
+    const bike=useSelector<IState, IBikeState>(state=>state.bike)
 
     console.log(bike.quadroId)
-    function handle(id:number){
-        console.log('ol'+id)
-        setQuadro(id)
-    }
+
     return(
         <Box p="2em 2em 2em 2.5em" boxSizing="border-box">
             <Box>

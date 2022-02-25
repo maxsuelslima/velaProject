@@ -1,4 +1,4 @@
-export function  handleSelectecdBike(id:number){
+export function handleSelectecdBike(id:number){
     return{
         type:'CHANGE_QUADRO',
         payload:{
